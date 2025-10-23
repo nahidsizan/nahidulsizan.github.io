@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects | Nahidul Islam Sizan</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                        },
+                        secondary: {
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <custom-navbar></custom-navbar>
+    
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex justify-between items-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                <i data-feather="code" class="text-primary-500"></i>
+                <span>My Projects</span>
+            </h1>
+            <a href="/" class="flex items-center text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-medium">
+                <i data-feather="arrow-left" class="mr-2"></i>
+                Back to Home
+            </a>
+        </div>
+        
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Project cards will be loaded here -->
+            <div id="all-projects-container" class="contents"></div>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+        
+        // Load all projects when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllProjects();
+        });
+
+        function loadAllProjects() {
+            const projects = [
+                {
+                    title: "E-Commerce Platform",
+                    description: "A full-stack e-commerce solution with React frontend and Node.js backend.",
+                    tags: ["React", "Node.js", "MongoDB"],
+                    image: "http://static.photos/technology/640x360/1",
+                    link: "#"
+                },
+                {
+                    title: "Weather Dashboard",
+                    description: "Real-time weather application with 5-day forecast and location search.",
+                    tags: ["JavaScript", "API", "CSS"],
+                    image: "http://static.photos/nature/640x360/2",
+                    link: "#"
+                },
+                {
+                    title: "Task Management App",
+                    description: "Productivity application to organize and track daily tasks with drag-and-drop.",
+                    tags: ["React", "Firebase", "TailwindCSS"],
+                    image: "http://static.photos/workspace/640x360/3",
+                    link: "#"
+                },
+                {
+                    title: "Portfolio Website",
+                    description: "Personal portfolio website to showcase projects and skills.",
+                    tags: ["HTML", "CSS", "JavaScript"],
+                    image: "http://static.photos/minimal/640x360/4",
+                    link: "#"
+                },
+                {
+                    title: "Recipe Finder",
+                    description: "Application to search for recipes based on available ingredients.",
+                    tags: ["React", "API", "Material UI"],
+                    image: "http://static.photos/food/640x360/5",
+                    link: "#"
+                },
+                {
+                    title: "Budget Tracker",
+                    description: "PWA for tracking expenses and income with offline functionality.",
+                    tags: ["PWA", "IndexedDB", "Service Workers"],
+                    image: "http://static.photos/finance/640x360/6",
+                    link: "#"
+                }
+            ];
+
+            const container = document.getElementById('all-projects-container');
+            
+            projects.forEach(project => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 fade-in';
+                projectCard.innerHTML = `
+                    <a href="${project.link}">
+                        <img src="${project.image}" alt="${project.title}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">${project.title}</h3>
+                            <p class="text-gray-600 dark:text-gray-300 mb-4">${project.description}</p>
+                            <div class="flex flex-wrap gap-2">
+                                ${project.tags.map(tag => `
+                                    <span class="bg-primary-100 dark:bg-primary-900/30 text-primary-800 dark:text-primary-200 text-xs px-3 py-1 rounded-full">${tag}</span>
+                                `).join('')}
+                            </div>
+                        </div>
+                    </a>
+                `;
+                container.appendChild(projectCard);
+            });
+        }
+    </script>
+</body>
+</html>

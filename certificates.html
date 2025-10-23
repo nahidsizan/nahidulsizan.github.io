@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Certificates | Nahidul Islam Sizan</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/feather-icons"></script>
+    <script src="https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        primary: {
+                            500: '#6366f1',
+                            600: '#4f46e5',
+                        },
+                        secondary: {
+                            500: '#14b8a6',
+                            600: '#0d9488',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 dark:bg-gray-900 transition-colors duration-300">
+    <custom-navbar></custom-navbar>
+    
+    <main class="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div class="flex justify-between items-center mb-12">
+            <h1 class="text-3xl md:text-4xl font-bold text-gray-900 dark:text-white flex items-center gap-3">
+                <i data-feather="award" class="text-primary-500"></i>
+                <span>My Certificates</span>
+            </h1>
+            <a href="/" class="flex items-center text-primary-500 hover:text-primary-600 dark:hover:text-primary-400 font-medium">
+                <i data-feather="arrow-left" class="mr-2"></i>
+                Back to Home
+            </a>
+        </div>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+            <!-- Certificate cards will be loaded here -->
+            <div id="all-certificates-container" class="contents"></div>
+        </div>
+    </main>
+
+    <custom-footer></custom-footer>
+
+    <script src="components/navbar.js"></script>
+    <script src="components/footer.js"></script>
+    <script src="script.js"></script>
+    <script>
+        feather.replace();
+        
+        // Load all certificates when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllCertificates();
+        });
+
+        function loadAllCertificates() {
+            const certificates = [
+                {
+                    title: "Full Stack Web Development",
+                    issuer: "Coursera",
+                    date: "June 2023",
+                    image: "http://static.photos/education/640x360/4",
+                    link: "#"
+                },
+                {
+                    title: "Machine Learning Fundamentals",
+                    issuer: "Udemy",
+                    date: "March 2023",
+                    image: "http://static.photos/science/640x360/5",
+                    link: "#"
+                },
+                {
+                    title: "Advanced JavaScript Concepts",
+                    issuer: "Udacity",
+                    date: "January 2023",
+                    image: "http://static.photos/technology/640x360/7",
+                    link: "#"
+                },
+                {
+                    title: "Cloud Computing Essentials",
+                    issuer: "AWS Academy",
+                    date: "November 2022",
+                    image: "http://static.photos/workspace/640x360/8",
+                    link: "#"
+                },
+                {
+                    title: "Data Structures and Algorithms",
+                    issuer: "University of Regina",
+                    date: "May 2022",
+                    image: "http://static.photos/education/640x360/9",
+                    link: "#"
+                },
+                {
+                    title: "Responsive Web Design",
+                    issuer: "freeCodeCamp",
+                    date: "February 2022",
+                    image: "http://static.photos/workspace/640x360/10",
+                    link: "#"
+                }
+            ];
+
+            const container = document.getElementById('all-certificates-container');
+            
+            certificates.forEach(cert => {
+                const certCard = document.createElement('div');
+                certCard.className = 'bg-white dark:bg-gray-800 rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition-shadow duration-300 fade-in';
+                certCard.innerHTML = `
+                    <a href="${cert.link}">
+                        <img src="${cert.image}" alt="${cert.title}" class="w-full h-48 object-cover">
+                        <div class="p-6">
+                            <h3 class="text-xl font-bold mb-2 text-gray-900 dark:text-white">${cert.title}</h3>
+                            <div class="flex justify-between items-center">
+                                <span class="text-gray-600 dark:text-gray-300">${cert.issuer}</span>
+                                <span class="text-gray-500 dark:text-gray-400 text-sm">${cert.date}</span>
+                            </div>
+                        </div>
+                    </a>
+                `;
+                container.appendChild(certCard);
+            });
+        }
+    </script>
+</body>
+</html>
